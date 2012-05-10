@@ -12,4 +12,4 @@ class TestSetDayProgram(BaseTestCase):
     def test_calls_post(self, mock_post):
         tstat = CommonThermostat('192.168.0.1')
         tstat.set_day_program('cool', 'tue', PROGRAM)
-        mock_post.assert_called_once_with('/tstat/program/cool/tue', json.dumps(PROGRAM))
+        mock_post.assert_called_once_with('/tstat/program/cool/tue', json.dumps(PROGRAM).encode('utf-8'))

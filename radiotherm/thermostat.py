@@ -157,7 +157,7 @@ class CommonThermostat(Thermostat):
         :param program:     See thermostat API docs
         :type program:      dict
         """
-        self.post('/tstat/program/%s/%s' % (heat_cool, day), json.dumps(program))
+        self.post('/tstat/program/%s/%s' % (heat_cool, day), json.dumps(program).encode('utf-8'))
 
 
 class CT50v194(CommonThermostat):
