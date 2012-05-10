@@ -1,0 +1,5 @@
+If python >= 2.7
+    $ python -m unittest discover
+
+Otherwise, you must use the "unit2" script that comes with the unittest2 module
+    $ /path/to/unit2 discover
