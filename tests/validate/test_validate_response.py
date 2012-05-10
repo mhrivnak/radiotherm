@@ -1,4 +1,5 @@
 import json
+
 from mock import MagicMock
 
 from radiotherm.validate import validate_response

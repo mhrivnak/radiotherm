@@ -7,7 +7,6 @@ URL = 'http://192.168.0.2/fake'
 IP = '192.168.0.2'
 
 class TestGet(BaseTestCase):
-
     @patch('radiotherm.thermostat.Thermostat._construct_url',
             MagicMock(return_value=URL))
     def test_opens_url(self):
