@@ -3,12 +3,13 @@
 from distutils.core import setup
 import os
 
-readme_location = os.path.join(os.path.dirname(__file__), 'README.rst')
+readme_location = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'README')
+long_desc = open(readme_location).read()
 
 setup(name='radiotherm',
     version='1.0',
     description='client library for wifi thermostats sold by radiothermostat.com',
-    long_description=open(readme_location).read(),
+    long_description=long_desc,
     packages=('radiotherm',),
     license='BSD',
     author='Michael Hrivnak',
