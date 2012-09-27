@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 
 from distutils.core import setup
-import os
 
-readme_location = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'README')
-long_desc = open(readme_location).read()
+long_desc = open('README.rst').read()
 
 setup(name='radiotherm',
     version='1.0',
