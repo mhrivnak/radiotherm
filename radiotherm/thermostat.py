@@ -167,3 +167,10 @@ class CT50v194(CommonThermostat):
     """
     MODEL = 'CT50 V1.94'
 
+class CT50v188(CommonThermostat):
+    """
+    Defines API features that differ for this specific model from
+    CommonThermostat
+    """
+    MODEL = 'CT50 V1.88'
+
