@@ -160,14 +160,6 @@ class CommonThermostat(Thermostat):
         self.post('/tstat/program/%s/%s' % (heat_cool, day), json.dumps(program).encode('utf-8'))
 
 
-class CT50v194(CommonThermostat):
-    """
-    Defines API features that differ for this specific model from
-    CommonThermostat
-    """
-    MODEL = 'CT50 V1.94'
-
-
 class CT50v109(CommonThermostat):
     """
     Defines API features that differ for this specific model from
@@ -175,3 +167,18 @@ class CT50v109(CommonThermostat):
     """
     MODEL = 'CT50 V1.09'
 
+
+class CT50v188(CommonThermostat):
+    """
+    Defines API features that differ for this specific model from
+    CommonThermostat
+    """
+    MODEL = 'CT50 V1.88'
+
+
+class CT50v194(CommonThermostat):
+    """
+    Defines API features that differ for this specific model from
+    CommonThermostat
+    """
+    MODEL = 'CT50 V1.94'
