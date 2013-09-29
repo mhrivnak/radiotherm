@@ -55,7 +55,13 @@ The library centers around the Thermostat class, whose attributes are closely re
 Device Versions
 ---------------
 
-Since I only have access to the 3M50 (which reports its model as "CT50 V1.94"), that is the only model currently supported by this library. Do you have another model? Let me know, and let's collaborate to get it supported!
+Supported models:
+
+- CT50 V1.09
+- CT50 V1.88
+- CT50 V1.94
+
+Since I only have access to the 3M50 (which reports its model as "CT50 V1.94"), that is the model that most development has occured with. Do you have another model? Let me know, and let's collaborate to get it supported!
 
 New models can be supported easily by subclassing CommonThermostat. Most of the API should work on all devices, but there are apparently some differences that will need to be accounted for. Long-term, I expect for those common features to be implemented on CommonThermostat, while device-specific deviations will be implemented on subclasses, such as the CT50v194 class.
 
@@ -84,3 +90,18 @@ I quickly identified some areas of Python-TStat that I wanted to improve. That l
 - *Python 3 Support*. This is also important to me. This library supports all python versions from 2.6 up.
 
 All of that said, Python-TStat is a good library that works well. I just decided that the quickest way for me to achieve the above goals was to start from scratch, which was relatively painless since the device's API isn't very complicated or large.
+
+Release Notes
+=============
+
+1.1
+---
+
+Thanks to community contributions, this library now supports the CT50 V1.09 and
+CT50 V1.88. No changes were made except to certify that all functionality works
+with these models, and add a new subclass for each.
+
+1.0
+---
+
+Initial release! This supports only the CT50 V1.94
