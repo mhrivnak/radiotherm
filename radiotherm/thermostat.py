@@ -182,3 +182,7 @@ class CT50v194(CommonThermostat):
     CommonThermostat
     """
     MODEL = 'CT50 V1.94'
+
+
+class CT80B2v103(CommonThermostat):
+    MODEL = 'CT80 Rev B2 V1.03'
