@@ -60,10 +60,11 @@ Supported models:
 - CT50 V1.09
 - CT50 V1.88
 - CT50 V1.94
+- CT80 Rev B2 V1.03
 
 Since I only have access to the 3M50 (which reports its model as "CT50 V1.94"), that is the model that most development has occured with. Do you have another model? Let me know, and let's collaborate to get it supported!
 
-New models can be supported easily by subclassing CommonThermostat. Most of the API should work on all devices, but there are apparently some differences that will need to be accounted for. Long-term, I expect for those common features to be implemented on CommonThermostat, while device-specific deviations will be implemented on subclasses, such as the CT50v194 class.
+New models can be supported easily by subclassing either the CT30 or CT80 classes, depending on the thermostat model. Most of the API should work on all devices, but there are apparently some differences that will need to be accounted for. Long-term, I expect for those common features to be implemented on CommonThermostat, while device-specific deviations will be implemented on subclasses, such as the CT50v194 class.
 
 Supported Features
 ------------------
