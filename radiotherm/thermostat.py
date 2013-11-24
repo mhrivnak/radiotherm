@@ -200,6 +200,16 @@ class CT80(CommonThermostat):
             1: 'Run only with heat',
             2: 'Run any time (runs fan)',
         })
+
+
+class CT80RevB(CT80):
+    """
+    Base model for all Revision B versions of the CT80
+    """
+
+    swing = fields.Field('/tstat/tswing', 'tswing')
+
+    # Dehumidifier attributes
     dehumidifier_mode = fields.Field('/tstat/dehumidifier', 'mode',
         human_value_map = {
             0: 'Off',
@@ -218,6 +228,7 @@ class CT80(CommonThermostat):
     external_dehumidifier_setpoint = fields.Field('/tstat/ext_dehumidifier', 'setpoint')
 
 
+# Specific model classes
 class CT50v109(CT30):
     """
     Defines API features that differ for this specific model from
@@ -242,7 +253,5 @@ class CT50v194(CT30):
     MODEL = 'CT50 V1.94'
 
 
-class CT80RevB2v103(CT80):
+class CT80RevB2v103(CT80RevB):
     MODEL = 'CT80 Rev B2 V1.03'
-
-    swing = fields.Field('/tstat/tswing', 'tswing')
