@@ -87,6 +87,8 @@ class CommonThermostat(Thermostat):
     hold = fields.Field('/tstat', 'hold', human_value_map=ENABLED_HUMAN_VALUE_MAP)
     t_heat = fields.Field('/tstat/ttemp', 't_heat', post_url='/tstat')
     t_cool = fields.Field('/tstat/ttemp', 't_cool', post_url='/tstat')
+    it_heat = fields.Field('/tstat/ttemp', 't_heat', post_url='/tstat', post_name='it_heat')
+    it_cool = fields.Field('/tstat/ttemp', 't_cool', post_url='/tstat', post_name='it_cool')
     swing = fields.Field('/tstat/tswing', 'tswing')
     tstate = fields.ReadOnlyField('/tstat', 'tstate',
         human_value_map={
@@ -111,7 +113,7 @@ class CommonThermostat(Thermostat):
             2 : 'Electric'
     })
 
-    # Note: the night light is tricky and will return 1 even when it's off!
+    # Note: the night light is tricky and will return the last-set intensity even if it's off!
     night_light = fields.Field('/tstat/night_light', 'intensity',
         human_value_map = {
             0: 'Off',
