@@ -89,7 +89,7 @@ class CommonThermostat(Thermostat):
     t_cool = fields.Field('/tstat/ttemp', 't_cool', post_url='/tstat')
     it_heat = fields.Field('/tstat/ttemp', 't_heat', post_url='/tstat', post_name='it_heat')
     it_cool = fields.Field('/tstat/ttemp', 't_cool', post_url='/tstat', post_name='it_cool')
-    swing = fields.Field('/tstat/tswing', 'tswing')
+
     tstate = fields.ReadOnlyField('/tstat', 'tstate',
         human_value_map={
             0 : 'Off',
@@ -244,3 +244,5 @@ class CT50v194(CT30):
 
 class CT80RevB2v103(CT80):
     MODEL = 'CT80 Rev B2 V1.03'
+
+    swing = fields.Field('/tstat/tswing', 'tswing')
