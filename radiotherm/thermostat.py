@@ -87,6 +87,9 @@ class CommonThermostat(Thermostat):
     hold = fields.Field('/tstat', 'hold', human_value_map=ENABLED_HUMAN_VALUE_MAP)
     t_heat = fields.Field('/tstat/ttemp', 't_heat', post_url='/tstat')
     t_cool = fields.Field('/tstat/ttemp', 't_cool', post_url='/tstat')
+    it_heat = fields.Field('/tstat/ttemp', 't_heat', post_url='/tstat', post_name='it_heat')
+    it_cool = fields.Field('/tstat/ttemp', 't_cool', post_url='/tstat', post_name='it_cool')
+
     tstate = fields.ReadOnlyField('/tstat', 'tstate',
         human_value_map={
             0 : 'Off',
@@ -109,17 +112,17 @@ class CommonThermostat(Thermostat):
             1 : 'Gas',
             2 : 'Electric'
     })
-    hvac_code = fields.ReadOnlyField('/tstat/hvac_settings', 'hvac_code',
-        human_value_map={
-            1 : '1 stage heat, 1 stage cool',
-            2 : '2 stage heat, 1 stage cool',
-            3 : '2 stage heat, 2 stage cool',
-            4 : '2 stage heat, 1 stage cool',
-            5 : '2 stage heat, 2 stage cool',
-            10 : '1 stage pump, 1 stage aux',
-            11 : '1 stage pump, 1 stage aux',
-            12 : '1 stage pump, no aux',
-    })
+
+    # Note: the night light is tricky and will return the last-set intensity even if it's off!
+    night_light = fields.Field('/tstat/night_light', 'intensity',
+        human_value_map = {
+            0: 'Off',
+            1: '25%',
+            2: '50%',
+            3: '75%',
+            4: '100%',
+        })
+
     # This isn't documented. It might be postable, but I'm not going to try.
     power = fields.ReadOnlyField('/tstat/power', 'power')
 
@@ -160,7 +163,73 @@ class CommonThermostat(Thermostat):
         self.post('/tstat/program/%s/%s' % (heat_cool, day), json.dumps(program).encode('utf-8'))
 
 
-class CT50v109(CommonThermostat):
+class CT30(CommonThermostat):
+    """
+    Base model for CT30-based thermostats (including the 3M-50)
+    """
+
+    hvac_code = fields.ReadOnlyField('/tstat/hvac_settings', 'hvac_code',
+        human_value_map={
+            1 : '1 stage heat, 1 stage cool',
+            2 : '2 stage heat, 1 stage cool',
+            3 : '2 stage heat, 2 stage cool',
+            4 : '2 stage heat, 1 stage cool',
+            5 : '2 stage heat, 2 stage cool',
+            10 : '1 stage pump, 1 stage aux',
+            11 : '1 stage pump, 1 stage aux',
+            12 : '1 stage pump, no aux',
+    })
+
+
+class CT80(CommonThermostat):
+    """
+    Base model for CT80-based thermostats
+    """
+
+    # These three stages attributes take place of the CT30's hvac_code
+    heat_stages = fields.ReadOnlyField('/tstat/hvac_settings', 'heat_stages')
+    cool_stages = fields.ReadOnlyField('/tstat/hvac_settings', 'cool_stages')
+    aux_stages = fields.ReadOnlyField('/tstat/hvac_settings', 'aux_stages')
+
+    ### (De)humidifier system ###
+    humidity = fields.ReadOnlyField('/tstat/humidity', 'humidity')
+
+    humidifier_mode = fields.Field('/tstat/humidifier', 'humidifier_mode',
+        human_value_map = {
+            0: 'Off',
+            1: 'Run only with heat',
+            2: 'Run any time (runs fan)',
+        })
+
+
+class CT80RevB(CT80):
+    """
+    Base model for all Revision B versions of the CT80
+    """
+
+    swing = fields.Field('/tstat/tswing', 'tswing')
+
+    # Dehumidifier attributes
+    dehumidifier_mode = fields.Field('/tstat/dehumidifier', 'mode',
+        human_value_map = {
+            0: 'Off',
+            1: 'On with fan',
+            2: 'On without fan',
+    })
+    dehumidifier_setpoint = fields.Field('/tstat/dehumidifier', 'setpoint')
+
+    # External dehumidifier
+    external_dehumidifier_mode = fields.Field('/tstat/ext_dehumidifier', 'mode',
+        human_value_map = {
+            0: 'Off',
+            1: 'On with fan',
+            2: 'On without fan',
+    })
+    external_dehumidifier_setpoint = fields.Field('/tstat/ext_dehumidifier', 'setpoint')
+
+
+# Specific model classes
+class CT50v109(CT30):
     """
     Defines API features that differ for this specific model from
     CommonThermostat
@@ -168,7 +237,7 @@ class CT50v109(CommonThermostat):
     MODEL = 'CT50 V1.09'
 
 
-class CT50v188(CommonThermostat):
+class CT50v188(CT30):
     """
     Defines API features that differ for this specific model from
     CommonThermostat
@@ -176,9 +245,13 @@ class CT50v188(CommonThermostat):
     MODEL = 'CT50 V1.88'
 
 
-class CT50v194(CommonThermostat):
+class CT50v194(CT30):
     """
     Defines API features that differ for this specific model from
     CommonThermostat
     """
     MODEL = 'CT50 V1.94'
+
+
+class CT80RevB2v103(CT80RevB):
+    MODEL = 'CT80 Rev B2 V1.03'

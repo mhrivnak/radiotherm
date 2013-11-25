@@ -8,7 +8,7 @@ class Field(object):
     define a piece of data from the API that can be accessed with GET and
     optionally with POST.
     """
-    def __init__(self, url, name, human_value_map=None, post_url=None):
+    def __init__(self, url, name, human_value_map=None, post_url=None, post_name=None):
         """
         :param url:             relative URL to use for GET and POST, except
                                 when post_url is defined.
@@ -26,11 +26,16 @@ class Field(object):
                                 URL than where you GET. Use this argument to
                                 specify a POST URL, and the 'url' argument will
                                 continue to be used for GETs.
+        :param post_name:       A few items that can be set are not available
+                                for reading, such as it_heat. Use this argument
+                                to specify a POST variable which is different
+                                from the GET variable.
         """
         self.url = url
         self.name = name
         self.human_value_map = human_value_map
         self.post_url = post_url
+        self.post_name = post_name
 
     def __get__(self, instance, owner):
         response = instance.get(self.url)
@@ -58,7 +63,7 @@ class Field(object):
         return ret
 
     def __set__(self, instance, value):
-        data = json.dumps({self.name: value}).encode('utf-8')
+        data = json.dumps({self.post_name or self.name: value}).encode('utf-8')
         response = instance.post(self.post_url or self.url, data)
         validate.validate_response(response)
 
