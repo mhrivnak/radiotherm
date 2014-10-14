@@ -113,15 +113,8 @@ class CommonThermostat(Thermostat):
             2 : 'Electric'
     })
 
-    # Note: the night light is tricky and will return the last-set intensity even if it's off!
-    night_light = fields.Field('/tstat/night_light', 'intensity',
-        human_value_map = {
-            0: 'Off',
-            1: '25%',
-            2: '50%',
-            3: '75%',
-            4: '100%',
-        })
+    # LED status values: 1 = green, 2 = yellow, 4 = red
+    energy_led = fields.WriteOnlyField('/tstat/led', 'energy_led', None)
 
     # This isn't documented. It might be postable, but I'm not going to try.
     power = fields.ReadOnlyField('/tstat/power', 'power')
@@ -226,6 +219,31 @@ class CT80RevB(CT80):
             2: 'On without fan',
     })
     external_dehumidifier_setpoint = fields.Field('/tstat/ext_dehumidifier', 'setpoint')
+
+    # Note: the night light is tricky and will return the last-set intensity even if it's off!
+    night_light = fields.Field('/tstat/night_light', 'intensity',
+        human_value_map = {
+            0: 'Off',
+            1: '25%',
+            2: '50%',
+            3: '75%',
+            4: '100%',
+        })
+
+    # Note: lock_mode 3 can only be changed remotely
+    lock_mode = fields.Field('/tstat/lock', 'lock_mode',
+        human_value_map={
+            0 : 'Lock disabled',
+            1 : 'Partial lock',
+            2 : 'Full lock',
+            3 : 'Utility lock'
+    })
+
+    simple_mode = fields.Field('/tstat/simple_mode', 'simple_mode',
+        human_value_map={
+            1 : 'Normal mode',
+            2 : 'Simple mode'
+    })
 
 
 # Specific model classes
