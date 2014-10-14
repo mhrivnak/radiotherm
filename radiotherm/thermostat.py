@@ -130,6 +130,11 @@ class CommonThermostat(Thermostat):
     program_heat = fields.ReadOnlyField('/tstat/program/heat', None)
     datalog = fields.ReadOnlyField('/tstat/datalog', None)
 
+    # Remote temperature control; posting to rem_temp sets rem_mode to 1
+    rem_mode = fields.Field('/tstat/remote_temp', 'rem_mode',
+        human_value_map=ENABLED_HUMAN_VALUE_MAP)
+    rem_temp = fields.WriteOnlyField('/tstat/remote_temp', 'rem_temp', None)
+
     ### sys subsystem ###
     sys = fields.ReadOnlyField('/sys', None)
     name = fields.Field('/sys/name', 'name')
