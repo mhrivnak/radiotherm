@@ -70,6 +70,7 @@ Device Versions
 
 Supported models:
 
+- CT30 v1.92
 - CT50 V1.09
 - CT50 V1.88
 - CT50 V1.94
