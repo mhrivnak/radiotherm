@@ -263,3 +263,8 @@ class CT50v194(CT30):
 
 class CT80RevB2v103(CT80RevB):
     MODEL = 'CT80 Rev B2 V1.03'
+
+class CT80RevB2v109(CT80RevB):
+    MODEL = 'CT80 Rev B2 V1.09'
+
+
