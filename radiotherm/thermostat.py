@@ -236,6 +236,13 @@ class CT30v192(CT30):
     """
     MODEL = 'CT30 V1.92'
 
+class CT30v194(CT30):
+    """
+    Defines API features that differ for this specific model from
+    CommonThermostat4
+    """
+    MODEL = 'CT30 V1.94'
+
 
 class CT50v109(CT30):
     """
