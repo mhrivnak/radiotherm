@@ -167,6 +167,7 @@ class CT30(CommonThermostat):
     Base model for CT30-based thermostats (including the 3M-50)
     """
 
+    MODEL = 'CT30'
     hvac_code = fields.ReadOnlyField('/tstat/hvac_settings', 'hvac_code',
         human_value_map={
             1 : '1 stage heat, 1 stage cool',
@@ -185,6 +186,7 @@ class CT80(CommonThermostat):
     Base model for CT80-based thermostats
     """
 
+    MODEL = 'CT80'
     ### Program Mode (extended tstat subsystem)
     program_mode = fields.Field('/tstat', 'program_mode',
         human_value_map={
@@ -216,7 +218,7 @@ class CT80RevB(CT80):
     """
     Base model for all Revision B versions of the CT80
     """
-
+    MODEL = 'CT80 RevB'
     swing = fields.Field('/tstat/tswing', 'tswing')
 
     # Dehumidifier attributes
@@ -264,6 +266,10 @@ class CT80RevB(CT80):
 
 
 # Specific model classes
+class CT50(CT30):
+    MODEL = 'CT50'
+
+
 class CT30v175(CT30):
     """
     Defines API features that differ for this specific model from
@@ -296,7 +302,7 @@ class CT30v199(CT30):
     MODEL = 'CT30 V1.99'
 
 
-class CT50v109(CT30):
+class CT50v109(CT50):
     """
     Defines API features that differ for this specific model from
     CommonThermostat
@@ -304,7 +310,7 @@ class CT50v109(CT30):
     MODEL = 'CT50 V1.09'
 
 
-class CT50v188(CT30):
+class CT50v188(CT50):
     """
     Defines API features that differ for this specific model from
     CommonThermostat
@@ -320,7 +326,7 @@ class CT50v192(CT30):
     MODEL = 'CT50 V1.92'
 
     
-class CT50v194(CT30):
+class CT50v194(CT50):
     """
     Defines API features that differ for this specific model from
     CommonThermostat
@@ -342,4 +348,3 @@ class CT80RevB2v103(CT80RevB):
 
 class CT80RevB2v109(CT80RevB):
     MODEL = 'CT80 Rev B2 V1.09'
-
