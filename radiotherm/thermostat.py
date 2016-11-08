@@ -252,7 +252,13 @@ class CT50v188(CT30):
     """
     MODEL = 'CT50 V1.88'
 
-
+class CT50v192(CT30):
+    """
+    Defines API features that differ for this specific model from
+    CommonThermostat
+    """
+    MODEL = 'CT50 V1.92'
+    
 class CT50v194(CT30):
     """
     Defines API features that differ for this specific model from
