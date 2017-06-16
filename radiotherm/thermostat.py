@@ -229,6 +229,14 @@ class CT80RevB(CT80):
 
 
 # Specific model classes
+class CT30v175(CT30):
+    """
+    Defines API features that differ for this specific model from
+    CommonThermostat
+    """
+    MODEL = 'CT30 V1.75'
+
+
 class CT30v192(CT30):
     """
     Defines API features that differ for this specific model from
