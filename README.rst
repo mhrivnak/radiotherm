@@ -72,6 +72,7 @@ Supported models:
 
 - CT30 v1.75
 - CT30 v1.92
+- CT30 v1.94
 - CT30 v1.99
 - CT50 V1.09
 - CT50 V1.88
@@ -140,6 +141,20 @@ complicated or large.
 
 Release Notes
 =============
+
+1.3
+---
+
+Several models were added with thanks to the corresponding contributors!
+
+CT30 v1.75 - Albert Lee
+CT30 V1.94 - billy1
+CT30 v1.99 - Adam Fazzari
+CT50 V1.92 - mdingman
+CT80 Rev B2 V1.09 - Steve Bauer
+
+Thanks also to Albert Lee for adding remote temperature support, energy LED
+support, plus support for the "lock_mode" and "simple_mode".
 
 1.2
 ---
