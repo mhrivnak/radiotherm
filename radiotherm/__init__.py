@@ -1,8 +1,28 @@
-from .thermostat import Thermostat, CommonThermostat, CT30v175, CT30v192, CT50v109, CT50v188, CT50v194, CT80RevB2v103, CT80RevB2v109
+from .thermostat import (
+    Thermostat,
+    CommonThermostat,
+    CT30v175,
+    CT30v192,
+    CT30v194,
+    CT50v109,
+    CT50v188,
+    CT50v194,
+    CT80RevB2v103,
+    CT80RevB2v109,
+)
 from . import discover
 from . import fields
 
-THERMOSTATS = (CT30v175, CT30v192, CT50v109, CT50v188, CT50v194, CT80RevB2v103, CT80RevB2v109)
+THERMOSTATS = (
+    CT30v175,
+    CT30v192,
+    CT30v194,
+    CT50v109,
+    CT50v188,
+    CT50v194,
+    CT80RevB2v103,
+    CT80RevB2v109,
+)
 
 
 def get_thermostat_class(model):
