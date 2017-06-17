@@ -76,6 +76,7 @@ Supported models:
 - CT50 V1.88
 - CT50 V1.94
 - CT80 Rev B2 V1.03
+- CT80 Rev B2 V1.09
 
 Since I only have access to the 3M50 (which reports its model as "CT50 V1.94"),
 that is the model that most development has occured with. Do you have another
