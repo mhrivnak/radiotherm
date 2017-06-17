@@ -75,6 +75,7 @@ Supported models:
 - CT30 v1.99
 - CT50 V1.09
 - CT50 V1.88
+- CT50 V1.92
 - CT50 V1.94
 - CT80 Rev B2 V1.03
 - CT80 Rev B2 V1.09
