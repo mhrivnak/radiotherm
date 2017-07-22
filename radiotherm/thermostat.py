@@ -65,7 +65,7 @@ class CommonThermostat(Thermostat):
         validate.validate_response(response)
 
     ### tstat subsystem ###
-    tstat = fields.ReadOnlyField('/tstat', None)
+    tstat = fields.ReadOnlyField('/tstat', None, validate_response=validate.validate_tstat_response)
     model = fields.ReadOnlyField('/tstat/model', 'model')
     version = fields.Field('/tstat/version', 'version')
     temp = fields.ReadOnlyField('/tstat', 'temp')
