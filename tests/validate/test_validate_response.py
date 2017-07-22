@@ -6,6 +6,8 @@ from radiotherm.validate import validate_response
 from tests.base_test_case import BaseTestCase
 
 class TestValidateResponse(BaseTestCase):
+    VALIDATE_RESPONSE = staticmethod(validate_response)
+    SIMPLE_RETURN_VALUE = {}
     COMPLEX_RETURN_VALUE = {
         'foo' : [1, 2, 3],
         'bar' : {'a' : 1, 'b' : 2}
@@ -23,30 +25,31 @@ class TestValidateResponse(BaseTestCase):
 
     def test_200(self):
         response = self.build_mock_response(200)
-        validate_response(response, {})
+        self.VALIDATE_RESPONSE(response, self.SIMPLE_RETURN_VALUE)
 
     def test_404(self):
         response = self.build_mock_response(404)
-        self.assertRaises(AttributeError, validate_response, response, {})
+        self.assertRaises(AttributeError, self.VALIDATE_RESPONSE, response,
+                          self.SIMPLE_RETURN_VALUE)
 
     def test_json_success(self):
         response = self.build_mock_response(200, self.COMPLEX_RETURN_VALUE)
-        validate_response(response)
+        self.VALIDATE_RESPONSE(response)
 
     def test_json_error(self):
         response = self.build_mock_response(200, self.ERROR_RETURN_VALUE)
-        self.assertRaises(AttributeError, validate_response, response)
+        self.assertRaises(AttributeError, self.VALIDATE_RESPONSE, response)
 
     def test_json_error_msg(self):
         response = self.build_mock_response(200, self.ERROR_MSG_RETURN_VALUE)
-        self.assertRaises(AttributeError, validate_response, response)
+        self.assertRaises(AttributeError, self.VALIDATE_RESPONSE, response)
 
     def test_content_error(self):
         response = self.build_mock_response(200)
-        self.assertRaises(AttributeError, validate_response, response,
+        self.assertRaises(AttributeError, self.VALIDATE_RESPONSE, response,
             self.ERROR_RETURN_VALUE)
 
     def test_content_error_msg(self):
         response = self.build_mock_response(200)
-        self.assertRaises(AttributeError, validate_response, response,
+        self.assertRaises(AttributeError, self.VALIDATE_RESPONSE, response,
             self.ERROR_MSG_RETURN_VALUE)

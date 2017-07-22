@@ -8,39 +8,43 @@ class Field(object):
     define a piece of data from the API that can be accessed with GET and
     optionally with POST.
     """
-    def __init__(self, url, name, human_value_map=None, post_url=None, post_name=None):
+    def __init__(self, url, name, human_value_map=None, post_url=None, post_name=None, validate_response=validate.validate_response):
         """
-        :param url:             relative URL to use for GET and POST, except
-                                when post_url is defined.
-        :param name:            key value for the data point you want. Most
-                                responses come as a dictionary, for example
-                                {'temp' : 73}, so you would pass 'temp' for
-                                this argument.
-        :param human_value_map: An optional dictionary where keys are actual
-                                values the server might return, and values
-                                are a human-readable form. This is useful for
-                                example when a return value of "0" actually
-                                means "Off". If you pass this argument, make
-                                sure it includes all possible values.
-        :param post_url:        A few items require you to POST to a different
-                                URL than where you GET. Use this argument to
-                                specify a POST URL, and the 'url' argument will
-                                continue to be used for GETs.
-        :param post_name:       A few items that can be set are not available
-                                for reading, such as it_heat. Use this argument
-                                to specify a POST variable which is different
-                                from the GET variable.
+        :param url:               relative URL to use for GET and POST, except
+                                  when post_url is defined.
+        :param name:              key value for the data point you want. Most
+                                  responses come as a dictionary, for example
+                                  {'temp' : 73}, so you would pass 'temp' for
+                                  this argument.
+        :param human_value_map:   An optional dictionary where keys are actual
+                                  values the server might return, and values
+                                  are a human-readable form. This is useful for
+                                  example when a return value of "0" actually
+                                  means "Off". If you pass this argument, make
+                                  sure it includes all possible values.
+        :param post_url:          A few items require you to POST to
+                                  a different URL than where you GET. Use this
+                                  argument to specify a POST URL, and the
+                                  'url' argument will continue to be used for
+                                  GETs.
+        :param post_name:         A few items that can be set are not available
+                                  for reading, such as it_heat. Use this
+                                  argument to specify a POST variable which is
+                                  different from the GET variable.
+        :param validate_response: The default validate_response function.  Use
+                                  this argument to override it.
         """
         self.url = url
         self.name = name
         self.human_value_map = human_value_map
         self.post_url = post_url
         self.post_name = post_name
+        self.validate_response = validate_response
 
     def __get__(self, instance, owner):
         response = instance.get(self.url)
         envelope = json.loads(response.read().decode('utf-8'))
-        validate.validate_response(response, envelope)
+        self.validate_response(response, envelope)
         return self._build_get_return(envelope)
 
     def _build_get_return(self, envelope):
@@ -65,7 +69,7 @@ class Field(object):
     def __set__(self, instance, value):
         data = json.dumps({self.post_name or self.name: value}).encode('utf-8')
         response = instance.post(self.post_url or self.url, data)
-        validate.validate_response(response)
+        self.validate_response(response)
 
     def _convert_to_human(self, value):
         """
