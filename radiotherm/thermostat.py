@@ -322,6 +322,10 @@ class CT80RevB1v100(CT80RevB):
     MODEL = 'CT80 Rev B1 V1.00'
 
     
+class CT80RevB2v100(CT80RevB):
+    MODEL = 'CT80 Rev B2 V1.00'
+
+
 class CT80RevB2v103(CT80RevB):
     MODEL = 'CT80 Rev B2 V1.03'
 

@@ -10,6 +10,7 @@ from .thermostat import (
     CT50v192,
     CT50v194,
     CT80RevB1v100,
+    CT80RevB2v100,
     CT80RevB2v103,
     CT80RevB2v109,
 )
@@ -26,6 +27,7 @@ THERMOSTATS = (
     CT50v192,
     CT50v194,
     CT80RevB1v100,
+    CT80RevB2v100,
     CT80RevB2v103,
     CT80RevB2v109,
 )
