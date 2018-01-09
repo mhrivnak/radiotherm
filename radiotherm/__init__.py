@@ -47,21 +47,24 @@ def get_thermostat_class(model):
             return thermostat
 
 
-def get_thermostat(host_address=None):
+def get_thermostat(host_address=None, model=None):
     """
     If a host_address is not passed, auto-discovery will happen. Auto-discovery
     will only succeed then exactly 1 thermostat is on your network.
 
     :param host_address:    optional address for a thermostat. This can be an
                             IP address or domain name.
+    :param model:           optional string representing the model and version
+                            number. Available from API resource /tstat/model
 
     :returns:   instance of a CommonThermostat subclass, or None if a matching
                 subclass cannot be found.
     """
     if host_address is None:
         host_address = discover.discover_address()
-    initial = CommonThermostat(host_address)
-    model = initial.model.get('raw')
+    if model is None:
+        initial = CommonThermostat(host_address)
+        model = initial.model.get('raw')
     thermostat_class = get_thermostat_class(model)
     if thermostat_class is not None:
         return thermostat_class(host_address)
