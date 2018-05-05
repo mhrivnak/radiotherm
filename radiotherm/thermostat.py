@@ -184,6 +184,15 @@ class CT80(CommonThermostat):
     Base model for CT80-based thermostats
     """
 
+    ### Program Mode (extended tstat subsystem)
+    program_mode = fields.Field('/tstat', 'program_mode',
+        human_value_map={
+            0 : 'Program A',
+            1 : 'Program B',
+            2 : 'Vacation',
+            3 : 'Holiday'
+        })
+
     # These three stages attributes take place of the CT30's hvac_code
     heat_stages = fields.ReadOnlyField('/tstat/hvac_settings', 'heat_stages')
     cool_stages = fields.ReadOnlyField('/tstat/hvac_settings', 'cool_stages')
