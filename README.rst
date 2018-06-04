@@ -144,6 +144,18 @@ complicated or large.
 Release Notes
 =============
 
+1.4
+---
+
+Several new models were added with thanks to the corresponding contributors!
+
+CT80 Rev B1 V1.00 - Eamon Doyle
+CT80 Rev B2 V1.00 - Clayton Craft
+
+Additional changes:
+- Add 'model' parameter to `get_thermostat()` - skimj
+- Add program_mode for CT80 - skimj
+
 1.3
 ---
 
