@@ -5,7 +5,7 @@ from distutils.core import setup
 long_desc = open('README.rst').read()
 
 setup(name='radiotherm',
-    version='1.3',
+    version='1.4.1',
     description='client library for wifi thermostats sold by radiothermostat.com',
     long_description=long_desc,
     packages=('radiotherm',),

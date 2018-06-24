@@ -144,6 +144,11 @@ complicated or large.
 Release Notes
 =============
 
+1.4.1
+-----
+
+Minor update to bump version in setup.py
+
 1.4
 ---
 
