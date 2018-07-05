@@ -85,6 +85,7 @@ class CommonThermostat(Thermostat):
     override = fields.ReadOnlyField('/tstat', 'override',
         human_value_map=ENABLED_HUMAN_VALUE_MAP)
     hold = fields.Field('/tstat', 'hold', human_value_map=ENABLED_HUMAN_VALUE_MAP)
+    led = fields.Field('/tstat/led', 'energy_led')
     t_heat = fields.Field('/tstat/ttemp', 't_heat', post_url='/tstat')
     t_cool = fields.Field('/tstat/ttemp', 't_cool', post_url='/tstat')
     it_heat = fields.Field('/tstat/ttemp', 't_heat', post_url='/tstat', post_name='it_heat')
