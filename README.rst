@@ -146,6 +146,14 @@ complicated or large.
 Release Notes
 =============
 
+2.0.0
+-----
+
+- Add support for the LED API (David Rasch)
+- Allow unknown thermostats to work properly instead of failing (@JerryWorkman,
+  @craftyguy)
+- Handle transient thermostat errors (@tubaman)
+
 1.4.1
 -----
 
