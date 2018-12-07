@@ -87,7 +87,9 @@ Since I only have access to the 3M50 (which reports its model as "CT50 V1.94"),
 that is the model that most development has occured with. Do you have another
 model? Let me know, and let's collaborate to get it supported!
 
-New models can be supported easily by subclassing either the CT30 or CT80
+New models that are derivatives of the CT30 or CT80 should be detected
+automatically and basic functionality should work. If you find this is not the
+case, it can be supported easily by subclassing either the CT30 or CT80
 classes, depending on the thermostat model. Most of the API should work on all
 devices, but there are apparently some differences that will need to be
 accounted for. Long-term, I expect for those common features to be implemented
