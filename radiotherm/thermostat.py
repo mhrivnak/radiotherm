@@ -22,8 +22,9 @@ class Thermostat(object):
     # and it's the right thing to do.
     JSON_HEADER = {'Content-Type' : 'application/json'}
 
-    def __init__(self, host):
+    def __init__(self, host, timeout=4):
         self.host = host
+        self.timeout = timeout
 
     def get(self, relative_url):
         """
@@ -32,7 +33,7 @@ class Thermostat(object):
         :returns:   file-like object as returned by urllib[2,.request].urlopen
         """
         url = self._construct_url(relative_url)
-        return request.urlopen(url)
+        return request.urlopen(url, timeout=self.timeout)
 
     def post(self, relative_url, value):
         """
@@ -43,7 +44,7 @@ class Thermostat(object):
         """
         url = self._construct_url(relative_url)
         request_instance = request.Request(url, value, self.JSON_HEADER)
-        return request.urlopen(request_instance)
+        return request.urlopen(request_instance, timeout=self.timeout)
 
     def _construct_url(self, relative_url):
         """
