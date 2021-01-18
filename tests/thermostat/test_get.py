@@ -1,4 +1,7 @@
-from mock import patch, MagicMock
+try:
+    from mock import patch, MagicMock
+except ImportError:
+    from unittest.mock import patch, MagicMock
 
 from tests.base_test_case import BaseTestCase
 from radiotherm.thermostat import Thermostat
@@ -13,4 +16,4 @@ class TestGet(BaseTestCase):
         with patch(self._get_urlopen_import_path()) as mock_urlopen:
             tstat = Thermostat(IP)
             tstat.get('/fake')
-            mock_urlopen.assert_called_once_with(URL)
+            mock_urlopen.assert_called_once_with(URL, timeout=4)

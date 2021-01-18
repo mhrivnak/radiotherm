@@ -1,6 +1,9 @@
 import json
 
-from mock import patch, MagicMock
+try:
+    from mock import patch, MagicMock
+except ImportError:
+    from unittest.mock import patch, MagicMock
 
 from radiotherm.thermostat import CommonThermostat
 from tests.base_test_case import BaseTestCase

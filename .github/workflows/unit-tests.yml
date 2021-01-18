@@ -1,0 +1,24 @@
+name: unit tests
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [2.7, 3.6, 3.7, 3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install mock for python 2.7
+      run: "if [ $(python -c 'import sys; print(sys.version_info < (3, 0))') = True ]; then pip install mock; fi"
+    - name: run tests
+      run: python -m unittest discover
