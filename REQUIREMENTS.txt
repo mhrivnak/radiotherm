@@ -1,1 +1,1 @@
-python >= 2.6 # it was released in 2008, so don't complain. Also fully python 3 compatible.
+python >= 2.7

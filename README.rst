@@ -27,7 +27,7 @@ Features
   no need to enter an IP address or domain name.
 - *Comprehensive* Nearly every documented feature that works is implemented in
   this library.
-- *Python 3 Support* This works in all Python versions from 2.6 up.
+- *Python 3 Support* This works in all Python versions from 2.7 up.
 - *Tested* There is good test coverage using true unit tests.
 
 Usage
@@ -145,6 +145,14 @@ complicated or large.
 
 Release Notes
 =============
+
+2.1.0
+-----
+
+- `Shorten http request timeout <https://github.com/mhrivnak/radiotherm/pull/47>`_
+  for cases where the thermostat does not respond. (@vinnyfuria)
+- Drop python 2.6 support
+- Use GitHub Actions instead of Travis-CI (@mhrivnak)
 
 2.0.0
 -----
