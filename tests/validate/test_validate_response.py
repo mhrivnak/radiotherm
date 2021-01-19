@@ -1,6 +1,9 @@
 import json
 
-from mock import MagicMock
+try:
+    from mock import MagicMock
+except ImportError:
+    from unittest.mock import MagicMock
 
 from radiotherm.validate import validate_response
 from tests.base_test_case import BaseTestCase

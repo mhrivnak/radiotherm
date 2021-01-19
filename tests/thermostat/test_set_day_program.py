@@ -1,6 +1,9 @@
 import json
 
-from mock import patch
+try:
+    from mock import patch
+except ImportError:
+    from unittest.mock import patch
 
 from tests.base_test_case import BaseTestCase
 from radiotherm.thermostat import CommonThermostat
